@@ -12,76 +12,50 @@
 
 PRJ_PTH	=	../minitalk/
 
-CLIENT	=	$(PRJ_PTH)client
-SERVER	=	$(PRJ_PTH)server
+CLIENT	=	client
+SERVER	=	server
 
-INC_PTH	=	$(PRJ_PTH)inc/
-INC		=	$(addprefix $(INC_PTH), minitalk.h)
-	
-SRC_PTH	=	$(PRJ_PTH)src/
+SRC_PTH	=	src/
 SRC		=	color.c util.c
 
-SRC_S	=	$(SRC_PTH)server.c
-SRC_C	=	$(SRC_PTH)client.c
+BONUS_PTH	=	bonus/
 
-BONUS_PTH	=	$(PRJ_PTH)/bonus/
-BONUS_S	=	$(BONUS_PTH)server_bonus.c
-BONUS_C	=	$(BONUS_PTH)client_bonus.c
-
-CLIENT_B	=	$(PRJ_PTH)client_bonus
-SERVER_B	=	$(PRJ_PTH)server_bonus
-
-OBJ_PTH	=	$(PRJ_PTH)obj/
-OBJ		=	$(SRC:%.c=$(OBJ_PTH)%.o)
+CLIENT_B	=	client_bonus
+SERVER_B	=	server_bonus
 
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra -Werror -O3
 RM		=	rm -f
 RM_RF	= 	rm -rf
 
-all: $(SERVER) $(CLIENT)
+all:
+	make $@ -C $(PRJ_PTH)
 
-$(SERVER): $(SRC_S) $(OBJ)
-	$(CC) $(CFLAGS) $< $(OBJ) -o $@
-	@echo "$(D_GREEN)$(SERVER) compiled$(NC)"
+$(SERVER):
+	make $@ -C $(PRJ_PTH)
 
 $(CLIENT): $(SRC_C) $(OBJ)
-	$(CC) $(CFLAGS) $< $(OBJ) -o $@
-	@echo "$(D_GREEN)$(CLIENT) compiled$(NC)"
-
-$(OBJ_PTH)%.o: $(SRC_PTH)%.c Makefile | $(OBJ_PTH)
-	$(CC) $(CFLAGS) -I$(INC) -c $< -o $@
-	@echo "$(D_GREEN)compiled $<$(NC)"
-
-$(OBJ_PTH):
-	mkdir -p $(OBJ_PTH)
-	@echo "$(D_GREEN)compiled $@$(NC)"
+	make $@ -C $(PRJ_PTH)
 
 clean:
-	$(RM) $(OBJ)
-	$(RM_RF) $(OBJ_PTH)
-	@echo "$(D_YELLOW)removed object files and dependency files$(NC)"
+	make $@ -C $(PRJ_PTH)
 
-fclean: clean
-	$(RM) $(SERVER) $(CLIENT)
-	$(RM) $(SERVER_B) $(CLIENT_B)
-	@echo "$(D_YELLOW)removed $(SERVER) and $(CLIENT)$(NC)"
+fclean:
+	make $@ -C $(PRJ_PTH)
 
-re: fclean all
+re:
+	make $@ -C $(PRJ_PTH)
 
 #	bonus
 
-bonus: $(SERVER_B) $(CLIENT_B)
+bonus:
+	make $@ -C $(PRJ_PTH)
 
-$(SERVER_B): $(BONUS_S) $(OBJ)
-	$(CC) $(CFLAGS) $^ -o $@
-	@echo "$(D_GREEN)$@ compiled$(NC)"
+$(SERVER_B):
+	make $@ -C $(PRJ_PTH)
 
-$(CLIENT_B): $(BONUS_C) $(OBJ)
-	$(CC) $(CFLAGS) $^ -o $@
-	@echo "$(D_GREEN)$@ compiled$(NC)"
-
-#	my additional rules
+$(CLIENT_B):
+	make $@ -C $(PRJ_PTH)
 
 #	Colors
 NC			=	\033[0;0m
@@ -102,11 +76,14 @@ L_PURPLE	=	\033[1;35m
 L_CYAN		=	\033[1;36m
 WHITE		=	\033[1;37m
 
+#	my additional rules
+
 clear:
 	@clear
 
-norm: clear
-	@norminette $(addprefix $(SRC_PTH), $(SRC)) $(SRC_S) $(SRC_C) $(BONUS_S) $(BONUS_C)
+norm:
+	make $@ -C $(PRJ_PTH)
+
 TRASH = .DS_Store
 
 clean_more:
@@ -135,10 +112,10 @@ endif
 #	test
 
 s: all
-	./$(SERVER)
+	./$(PRJ_PTH)$(SERVER)
 
 sb: all bonus
-	./$(SERVER_B)
+	./$(PRJ_PTH)$(SERVER_B)
 
 t: all
 	./$(PRJ_PTH)client $(p) "$(t)"
@@ -148,12 +125,12 @@ TXT_PTH	=	txt/
 #	./client $(p) "$(cat file)"
 
 define run_txt
-	@echo "$(D_YELLOW)Makefile: ./client $(p)$$cat $(addprefix $(TXT_PTH), $1) $(NC)"
+	@echo "$(D_YELLOW)Makefile: ./$(PRJ_PTH)client $(p)$$cat $(addprefix $(TXT_PTH), $1) $(NC)"
 	./$(PRJ_PTH)client $(p) "$(shell cat $(addprefix $(TXT_PTH), $1))"
 endef
 
 define bonus_txt
-	@echo "$(D_YELLOW)Makefile: ./client_bonus $(p)$$cat $(addprefix $(TXT_PTH), $1) $(NC)"
+	@echo "$(D_YELLOW)Makefile: ./$(PRJ_PTH)client_bonus $(p)$$cat $(addprefix $(TXT_PTH), $1) $(NC)"
 	./$(PRJ_PTH)client_bonus $(p) "$(shell cat $(addprefix $(TXT_PTH), $1))"
 endef
 
