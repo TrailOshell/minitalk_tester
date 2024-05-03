@@ -491,4 +491,4 @@ else
 	@$(call run_txt, 50k.txt)
 endif
 
-test_all: 100 jp rus ukr gr emoji 25k 50k thai 
+test_all: 100 emoji gr rus ukr 25k 50k thai jp 
