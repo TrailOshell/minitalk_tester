@@ -10,8 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-#PRJ_PTH	=	../minitalk/
-PRJ_PTH	=	../clone/
+PRJ_PTH	=	../minitalk/
 
 CLIENT	=	$(PRJ_PTH)client
 SERVER	=	$(PRJ_PTH)server
