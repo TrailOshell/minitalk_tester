@@ -15,11 +15,6 @@ PRJ_PTH	=	../minitalk/
 CLIENT	=	client
 SERVER	=	server
 
-SRC_PTH	=	src/
-SRC		=	color.c util.c
-
-BONUS_PTH	=	bonus/
-
 CLIENT_B	=	client_bonus
 SERVER_B	=	server_bonus
 
@@ -34,7 +29,7 @@ all:
 $(SERVER):
 	make $@ -C $(PRJ_PTH)
 
-$(CLIENT): $(SRC_C) $(OBJ)
+$(CLIENT):
 	make $@ -C $(PRJ_PTH)
 
 clean:
@@ -98,7 +93,6 @@ log: clear
 
 push:
 	@git push
-	-@git push intra
 	-@clear && git log --name-status -1
 
 git_add:
