@@ -226,10 +226,8 @@ define repeat
 	@n=$(n); \
 	while [ $${n} -lt $2 ] ; do \
 		n=`expr $$n + 1`; \
-		echo "$(D_YELLOW)$$n Makefile: ./$(PRJ_PTH)client_bonus $(p)$$cat $(addprefix $(TXT_PTH), $1) $(NC)"; \
-		if [ $${b} -eq 1 ] ; then \
-			./$(PRJ_PTH)client_bonus $(p) "$(shell cat $(addprefix $(TXT_PTH), $1))" ; \
-		fi; \
+		echo "$(D_YELLOW)$$n Makefile: ./$(PRJ_PTH)client $(p)$$cat $(addprefix $(TXT_PTH), $1) $(NC)"; \
+		./$(PRJ_PTH)client $(p) "$(shell cat $(addprefix $(TXT_PTH), $1))" ; \
 	done; 
 endef
 
