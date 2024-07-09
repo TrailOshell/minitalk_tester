@@ -24,7 +24,7 @@ RM		=	rm -f
 RM_RF	= 	rm -rf
 
 all:
-	make $@ -C $(PRJ_PTH)
+	make $@ --no-print-directory -C $(PRJ_PTH)
 
 $(SERVER):
 	make $@ -C $(PRJ_PTH)
@@ -128,6 +128,8 @@ define bonus_txt
 	./$(PRJ_PTH)client_bonus $(p) "$(shell cat $(addprefix $(TXT_PTH), $1))"
 endef
 
+test_all: 100 emoji gr rus ukr 25k 50k thai jp 
+
 test: all
 ifdef txt
 	@$(call run_txt, $(txt))
@@ -218,248 +220,24 @@ else
 	@$(call run_txt, $@.txt)
 endif
 
+n ?= 0
+
+define repeat
+	@n=$(n); \
+	while [ $${n} -lt $2 ] ; do \
+		n=`expr $$n + 1`; \
+		echo "$(D_YELLOW)$$n Makefile: ./$(PRJ_PTH)client_bonus $(p)$$cat $(addprefix $(TXT_PTH), $1) $(NC)"; \
+		if [ $${b} -eq 1 ] ; then \
+			./$(PRJ_PTH)client_bonus $(p) "$(shell cat $(addprefix $(TXT_PTH), $1))" ; \
+		fi; \
+	done; 
+endef
+
 multi_thai: all
-	@echo "$(D_YELLOW)1 $(NC)"
-ifdef b
-	@$(call bonus_txt, thai.txt)
-else
-	@$(call run_txt, thai.txt)
-endif
-	@echo "$(D_YELLOW)2 $(NC)"
-ifdef b
-	@$(call bonus_txt, thai.txt)
-else
-	@$(call run_txt, thai.txt)
-endif
-	@echo "$(D_YELLOW)3 $(NC)"
-ifdef b
-	@$(call bonus_txt, thai.txt)
-else
-	@$(call run_txt, thai.txt)
-endif
-	@echo "$(D_YELLOW)4 $(NC)"
-ifdef b
-	@$(call bonus_txt, thai.txt)
-else
-	@$(call run_txt, thai.txt)
-endif
-	@echo "$(D_YELLOW)5 $(NC)"
-ifdef b
-	@$(call bonus_txt, thai.txt)
-else
-	@$(call run_txt, thai.txt)
-endif
-	@echo "$(D_YELLOW)6 $(NC)"
-ifdef b
-	@$(call bonus_txt, thai.txt)
-else
-	@$(call run_txt, thai.txt)
-endif
-	@echo "$(D_YELLOW)7 $(NC)"
-ifdef b
-	@$(call bonus_txt, thai.txt)
-else
-	@$(call run_txt, thai.txt)
-endif
-	@echo "$(D_YELLOW)8 $(NC)"
-ifdef b
-	@$(call bonus_txt, thai.txt)
-else
-	@$(call run_txt, thai.txt)
-endif
-	@echo "$(D_YELLOW)9 $(NC)"
-ifdef b
-	@$(call bonus_txt, thai.txt)
-else
-	@$(call run_txt, thai.txt)
-endif
-	@echo "$(D_YELLOW)10 $(NC)"
-ifdef b
-	@$(call bonus_txt, thai.txt)
-else
-	@$(call run_txt, thai.txt)
-endif
-	@echo "$(D_YELLOW)11 $(NC)"
-ifdef b
-	@$(call bonus_txt, thai.txt)
-else
-	@$(call run_txt, thai.txt)
-endif
-	@echo "$(D_YELLOW)12 $(NC)"
-ifdef b
-	@$(call bonus_txt, thai.txt)
-else
-	@$(call run_txt, thai.txt)
-endif
-	@echo "$(D_YELLOW)13 $(NC)"
-ifdef b
-	@$(call bonus_txt, thai.txt)
-else
-	@$(call run_txt, thai.txt)
-endif
-	@echo "$(D_YELLOW)14 $(NC)"
-ifdef b
-	@$(call bonus_txt, thai.txt)
-else
-	@$(call run_txt, thai.txt)
-endif
-	@echo "$(D_YELLOW)15 $(NC)"
-ifdef b
-	@$(call bonus_txt, thai.txt)
-else
-	@$(call run_txt, thai.txt)
-endif
-	@echo "$(D_YELLOW)16 $(NC)"
-ifdef b
-	@$(call bonus_txt, thai.txt)
-else
-	@$(call run_txt, thai.txt)
-endif
-	@echo "$(D_YELLOW)17 $(NC)"
-ifdef b
-	@$(call bonus_txt, thai.txt)
-else
-	@$(call run_txt, thai.txt)
-endif
-	@echo "$(D_YELLOW)18 $(NC)"
-ifdef b
-	@$(call bonus_txt, thai.txt)
-else
-	@$(call run_txt, thai.txt)
-endif
-	@echo "$(D_YELLOW)19 $(NC)"
-ifdef b
-	@$(call bonus_txt, thai.txt)
-else
-	@$(call run_txt, thai.txt)
-endif
-	@echo "$(D_YELLOW)20 $(NC)"
-ifdef b
-	@$(call bonus_txt, thai.txt)
-else
-	@$(call run_txt, thai.txt)
-endif
+	@$(call repeat, thai.txt, 20)
 
 multi_50k: all
-	@echo "$(D_YELLOW)1 $(NC)"
-ifdef b
-	@$(call bonus_txt, 50k.txt)
-else
-	@$(call run_txt, 50k.txt)
-endif
-	@echo "$(D_YELLOW)2 $(NC)"
-ifdef b
-	@$(call bonus_txt, 50k.txt)
-else
-	@$(call run_txt, 50k.txt)
-endif
-	@echo "$(D_YELLOW)3 $(NC)"
-ifdef b
-	@$(call bonus_txt, 50k.txt)
-else
-	@$(call run_txt, 50k.txt)
-endif
-	@echo "$(D_YELLOW)4 $(NC)"
-ifdef b
-	@$(call bonus_txt, 50k.txt)
-else
-	@$(call run_txt, 50k.txt)
-endif
-	@echo "$(D_YELLOW)5 $(NC)"
-ifdef b
-	@$(call bonus_txt, 50k.txt)
-else
-	@$(call run_txt, 50k.txt)
-endif
-	@echo "$(D_YELLOW)6 $(NC)"
-ifdef b
-	@$(call bonus_txt, 50k.txt)
-else
-	@$(call run_txt, 50k.txt)
-endif
-	@echo "$(D_YELLOW)7 $(NC)"
-ifdef b
-	@$(call bonus_txt, 50k.txt)
-else
-	@$(call run_txt, 50k.txt)
-endif
-	@echo "$(D_YELLOW)8 $(NC)"
-ifdef b
-	@$(call bonus_txt, 50k.txt)
-else
-	@$(call run_txt, 50k.txt)
-endif
-	@echo "$(D_YELLOW)9 $(NC)"
-ifdef b
-	@$(call bonus_txt, 50k.txt)
-else
-	@$(call run_txt, 50k.txt)
-endif
-	@echo "$(D_YELLOW)10 $(NC)"
-ifdef b
-	@$(call bonus_txt, 50k.txt)
-else
-	@$(call run_txt, 50k.txt)
-endif
-	@echo "$(D_YELLOW)11 $(NC)"
-ifdef b
-	@$(call bonus_txt, 50k.txt)
-else
-	@$(call run_txt, 50k.txt)
-endif
-	@echo "$(D_YELLOW)12 $(NC)"
-ifdef b
-	@$(call bonus_txt, 50k.txt)
-else
-	@$(call run_txt, 50k.txt)
-endif
-	@echo "$(D_YELLOW)13 $(NC)"
-ifdef b
-	@$(call bonus_txt, 50k.txt)
-else
-	@$(call run_txt, 50k.txt)
-endif
-	@echo "$(D_YELLOW)14 $(NC)"
-ifdef b
-	@$(call bonus_txt, 50k.txt)
-else
-	@$(call run_txt, 50k.txt)
-endif
-	@echo "$(D_YELLOW)15 $(NC)"
-ifdef b
-	@$(call bonus_txt, 50k.txt)
-else
-	@$(call run_txt, 50k.txt)
-endif
-	@echo "$(D_YELLOW)16 $(NC)"
-ifdef b
-	@$(call bonus_txt, 50k.txt)
-else
-	@$(call run_txt, 50k.txt)
-endif
-	@echo "$(D_YELLOW)17 $(NC)"
-ifdef b
-	@$(call bonus_txt, 50k.txt)
-else
-	@$(call run_txt, 50k.txt)
-endif
-	@echo "$(D_YELLOW)18 $(NC)"
-ifdef b
-	@$(call bonus_txt, 50k.txt)
-else
-	@$(call run_txt, 50k.txt)
-endif
-	@echo "$(D_YELLOW)19 $(NC)"
-ifdef b
-	@$(call bonus_txt, 50k.txt)
-else
-	@$(call run_txt, 50k.txt)
-endif
-	@echo "$(D_YELLOW)20 $(NC)"
-ifdef b
-	@$(call bonus_txt, 50k.txt)
-else
-	@$(call run_txt, 50k.txt)
-endif
+	@$(call repeat, 50k.txt, 20)
 
-test_all: 100 emoji gr rus ukr 25k 50k thai jp 
+repeat: all
+	@$(call repeat, $(txt), $(r))
