@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-PRJ_PTH	=	../minitalk/
+PRJ_PTH	=	../
 
 CLIENT	=	client
 SERVER	=	server
@@ -19,7 +19,7 @@ CLIENT_B	=	client_bonus
 SERVER_B	=	server_bonus
 
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror -O3
+CFLAGS	=	-Wall -Wextra -Werror
 RM		=	rm -f
 RM_RF	= 	rm -rf
 
